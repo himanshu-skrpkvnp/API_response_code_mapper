@@ -17,8 +17,8 @@ export interface PeriodicElement {
   editMode : boolean ;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { ApiName  : "ApiReqVal" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static' , editMode : false },
+ const ELEMENT_DATA: PeriodicElement[] = [
+  { ApiName  : "ApiReqVal" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static'  , editMode : false },
   { ApiName  : "ApiReqVal2" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static' , editMode : false},
   { ApiName  : "ApiReqVal3" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static' , editMode : false},
   
@@ -30,13 +30,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'] ,
   standalone: true,
-  imports: [MatTableModule , RouterLink  , FormsModule , NgIf , CommonModule],
+  imports: [MatTableModule  ,  FormsModule , NgIf , CommonModule],
 })
 
 export class MainComponent {
-onFieldBlur(_t26: any) {
-throw new Error('Method not implemented.');
-}
+
   displayedColumns: string[] = ['Actions', 'ApiName', 'TestCase', 'Result', 'Message' , 'Profile' , 'ProfileStrategy'];
   dataSource = ELEMENT_DATA;
   @ViewChild(MatTable) table: MatTable<PeriodicElement> | undefined;
@@ -67,11 +65,22 @@ throw new Error('Method not implemented.');
     {ELEMENT_DATA.splice(indexToDelete, 1);
     this.dataSource = ELEMENT_DATA;
     if( this.table != undefined) this.table.renderRows();
+    console.log( ELEMENT_DATA.length ) ;
     }
   }
 
   addNew() : void {
     this.router.navigate(['/addnew']);
+  }
+  
+  onFieldBlur( element : PeriodicElement) {
+    const index = ELEMENT_DATA.findIndex(item => item === element);
+    if (index !== -1) {
+      console.log( index )
+      ELEMENT_DATA[index] = { ...element };
+   }  
+    console.log( element ) ;
+    console.log( ELEMENT_DATA  )
   }
 }
 

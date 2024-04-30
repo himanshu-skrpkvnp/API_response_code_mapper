@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule , 
     MatTableModule , 
     MainComponent , 
-    CommonModule, RouterOutlet, RouterLink, RouterLinkActive 
+    CommonModule, RouterOutlet, RouterLink, RouterLinkActive  
   ],
   providers: [],
   bootstrap: [AppComponent]
