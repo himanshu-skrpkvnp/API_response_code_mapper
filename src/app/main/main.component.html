@@ -1,1 +1,55 @@
-<p>main works!</p>
+<article class="table-header">
+    <button class="button-add-row" mat-button (click)="addNew()">Add New</button>
+</article>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button (click)="onEdit(element)">Edit</button>
+          <button mat-raised-button (click)="onDelete(element)">Delete</button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ApiName">
+      <th mat-header-cell *matHeaderCellDef> ApiName </th>
+      <td mat-cell *matCellDef="let element"> {{element.ApiName}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="TestCase">
+      <th mat-header-cell *matHeaderCellDef> TestCase </th>
+      <td mat-cell *matCellDef="let element"> {{element.TestCase}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Result">
+      <th mat-header-cell *matHeaderCellDef> Result </th>
+      <td mat-cell *matCellDef="let element"> {{element.Result}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Message">
+      <th mat-header-cell *matHeaderCellDef>Message</th>
+      <td mat-cell *matCellDef="let element"> {{element.Message}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Profile">
+        <th mat-header-cell *matHeaderCellDef> Profile </th>
+        <td mat-cell *matCellDef="let element"> {{element.Profile}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ProfileStrategy">
+        <th mat-header-cell *matHeaderCellDef> ProfileStrategy </th>
+        <td mat-cell *matCellDef="let element"> {{element.ProfileStrategy}} </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
