@@ -8,6 +8,7 @@ import { AddnewComponent } from './addnew/addnew.component';
 import {MatTableModule} from '@angular/material/table';
 import { RouterModule, Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +22,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule , 
     MatTableModule , 
     MainComponent , 
-    CommonModule, RouterOutlet, RouterLink, RouterLinkActive
+    CommonModule, RouterOutlet, RouterLink, RouterLinkActive 
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,44 +8,104 @@
   
     <!-- Position Column -->
     <ng-container matColumnDef="Actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <!-- <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
           <button mat-raised-button (click)="onEdit(element)">Edit</button>
+          <button mat-raised-button (click)="onDelete(element)">Delete</button>
+        </td> -->
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button (click)="toggleEditMode(element)">Edit</button>
           <button mat-raised-button (click)="onDelete(element)">Delete</button>
         </td>
     </ng-container>
 
     <ng-container matColumnDef="ApiName">
+      <!-- <th mat-header-cell *matHeaderCellDef> ApiName </th>
+      <td mat-cell *matCellDef="let element"> {{element.ApiName}} </td> -->
       <th mat-header-cell *matHeaderCellDef> ApiName </th>
-      <td mat-cell *matCellDef="let element"> {{element.ApiName}} </td>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.editMode; else editModeTemplate">
+          {{ element.ApiName }}
+        </ng-container>
+        <ng-template #editModeTemplate>
+          <input type="String" [(ngModel)]="element.ApiName" (blur)="onFieldBlur(element)">
+        </ng-template>
+      </td>
+
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="TestCase">
+      <!-- <th mat-header-cell *matHeaderCellDef> TestCase </th>
+      <td mat-cell *matCellDef="let element"> {{element.TestCase}} </td> -->
       <th mat-header-cell *matHeaderCellDef> TestCase </th>
-      <td mat-cell *matCellDef="let element"> {{element.TestCase}} </td>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.editMode; else editModeTemplate">
+          {{ element.TestCase }}
+        </ng-container>
+        <ng-template #editModeTemplate>
+          <input type="String" [(ngModel)]="element.TestCase" (blur)="onFieldBlur(element)">
+        </ng-template>
+      </td>
     </ng-container>
   
     <!-- Weight Column -->
     <ng-container matColumnDef="Result">
+      <!-- <th mat-header-cell *matHeaderCellDef> Result </th>
+      <td mat-cell *matCellDef="let element"> {{element.Result}} </td> -->
       <th mat-header-cell *matHeaderCellDef> Result </th>
-      <td mat-cell *matCellDef="let element"> {{element.Result}} </td>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.editMode; else editModeTemplate">
+          {{ element.Result }}
+        </ng-container>
+        <ng-template #editModeTemplate>
+          <input type="String" [(ngModel)]="element.Result" (blur)="onFieldBlur(element)">
+        </ng-template>
+      </td>
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="Message">
-      <th mat-header-cell *matHeaderCellDef>Message</th>
-      <td mat-cell *matCellDef="let element"> {{element.Message}} </td>
+      <!-- <th mat-header-cell *matHeaderCellDef>Message</th>
+      <td mat-cell *matCellDef="let element"> {{element.Message}} </td> -->
+      <th mat-header-cell *matHeaderCellDef> Message </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.editMode; else editModeTemplate">
+          {{ element.Message }}
+        </ng-container>
+        <ng-template #editModeTemplate>
+          <input type="String" [(ngModel)]="element.Message" (blur)="onFieldBlur(element)">
+        </ng-template>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="Profile">
+        <!-- <th mat-header-cell *matHeaderCellDef> Profile </th>
+        <td mat-cell *matCellDef="let element"> {{element.Profile}} </td> -->
         <th mat-header-cell *matHeaderCellDef> Profile </th>
-        <td mat-cell *matCellDef="let element"> {{element.Profile}} </td>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.editMode; else editModeTemplate">
+          {{ element.Profile }}
+        </ng-container>
+        <ng-template #editModeTemplate>
+          <input type="String" [(ngModel)]="element.Profile" (blur)="onFieldBlur(element)">
+        </ng-template>
+      </td>
       </ng-container>
 
       <ng-container matColumnDef="ProfileStrategy">
+        <!-- <th mat-header-cell *matHeaderCellDef> ProfileStrategy </th>
+        <td mat-cell *matCellDef="let element"> {{element.ProfileStrategy}} </td> -->
         <th mat-header-cell *matHeaderCellDef> ProfileStrategy </th>
-        <td mat-cell *matCellDef="let element"> {{element.ProfileStrategy}} </td>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.editMode; else editModeTemplate">
+          {{ element.ProfileStrategy }}
+        </ng-container>
+        <ng-template #editModeTemplate>
+          <input type="String" [(ngModel)]="element.ProfileStrategy" (blur)="onFieldBlur(element)">
+        </ng-template>
+      </td>
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
