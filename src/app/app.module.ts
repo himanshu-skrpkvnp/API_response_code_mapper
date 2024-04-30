@@ -6,19 +6,22 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { AddnewComponent } from './addnew/addnew.component';
 import {MatTableModule} from '@angular/material/table';
+import { RouterModule, Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // MainComponent ,
     AddnewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule , 
     MatTableModule , 
-    MainComponent
+    MainComponent , 
+    CommonModule, RouterOutlet, RouterLink, RouterLinkActive
   ],
   providers: [],
   bootstrap: [AppComponent]

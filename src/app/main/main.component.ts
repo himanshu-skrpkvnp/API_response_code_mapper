@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
-import { RouterModule, Router } from '@angular/router';
+import { Component  , ViewChild} from '@angular/core';
+import {MatTableModule , MatTable} from '@angular/material/table';
+import { RouterModule, Router, RouterLink } from '@angular/router';
 
 
 
 
 export interface PeriodicElement {
-  ApiName : String ;
+  ApiName : Number ;
   TestCase : String ;
   Result : String ;
   Message : String ;
@@ -16,7 +16,9 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { ApiName  : 'ReqValadd' , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static'},
+  { ApiName  : 1 , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static'},
+  { ApiName  : 2 , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static'},
+  { ApiName  : 3 , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static'},
   
 
 ];
@@ -26,13 +28,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'] ,
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule , RouterLink ],
 })
 
 export class MainComponent {
   displayedColumns: string[] = ['Actions', 'ApiName', 'TestCase', 'Result', 'Message' , 'Profile' , 'ProfileStrategy'];
   dataSource = ELEMENT_DATA;
-  table: any;
+  @ViewChild(MatTable) table: MatTable<PeriodicElement> | undefined;
 
   constructor(private router: Router) {}
 
@@ -46,12 +48,14 @@ export class MainComponent {
   }
 
   onDelete(element: PeriodicElement): void {
-    // const indexToDelete = this.dataSource.findIndex(
-    //   (periodicElement) => periodicElement.position === element.position
-    // );
-    // ELEMENT_DATA.splice(indexToDelete, 1);
-    // this.dataSource = ELEMENT_DATA;
-    // this.table.renderRows();
+    const indexToDelete = this.dataSource.findIndex(
+      (PeriodicElement) => PeriodicElement.ApiName === element.ApiName
+    );
+    if( indexToDelete != -1  )
+    {ELEMENT_DATA.splice(indexToDelete, 1);
+    this.dataSource = ELEMENT_DATA;
+    if( this.table != undefined) this.table.renderRows();
+    }
   }
 
   addNew() : void {
