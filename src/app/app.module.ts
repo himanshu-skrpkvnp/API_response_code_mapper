@@ -15,14 +15,14 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    AddnewComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule , 
     MatTableModule , 
     MainComponent , 
-    CommonModule, RouterOutlet, RouterLink, RouterLinkActive  
+    CommonModule, RouterOutlet, RouterLink, RouterLinkActive  , AddnewComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
