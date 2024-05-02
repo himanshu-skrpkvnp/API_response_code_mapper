@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
+
+interface FormRow {
+  apiName: string;
+  testCase: string;
+  result: boolean;
+  message: string;
+  profile: boolean;
+  profileStrategy?: string;
+}
 
 @Component({
   selector: 'app-addnew',
@@ -12,31 +22,48 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   templateUrl: './addnew.component.html',
   styleUrls: ['./addnew.component.css'],
   standalone: true,
-  imports: [ FormsModule , MatFormFieldModule , MatInputModule , MatProgressBarModule ],
+  imports: [ FormsModule , MatFormFieldModule , MatInputModule , MatProgressBarModule , CommonModule ],
 })
 export class AddnewComponent {
-onProfileChange($event: Event,_t11: any) {
-throw new Error('Method not implemented.');
-}
-onCancel() {
-throw new Error('Method not implemented.');
-}
-onSubmit() {
-throw new Error('Method not implemented.');
-}
 
-  formData: any = {
-    apiname : '',
-    testcase : '',
-    message : '',
-    result : false,
-    profile : false,
-    profilestrategy : ''
-  };
+  
+  formData: { rows: FormRow[] } = { rows: [] };
 
+  // constructor() {
+  //   this.addNewRow();
+  // }
   constructor(private router: Router) {
+    this.addNewRow();
   }
 
+  addNewRow(): void {
+    this.formData.rows.push({
+      apiName: '',
+      testCase: '',
+      result: true,
+      message: '',
+      profile: false
+    });
+  }
+
+  onSubmit(form: NgForm): void {
+    // Handle form submission logic here
+    console.log('Form submitted:', this.formData);
+  }
+
+  onCancel(): void {
+    // Handle cancel button click logic here
+    console.log('Form cancelled');
+  }
+
+  onProfileChange(event: any, index: number): void {
+    if (event.target.value === 'true') {
+      this.formData.rows[index].profile = true;
+    } else {
+      this.formData.rows[index].profile = false;
+      this.formData.rows[index].profileStrategy = undefined;
+    }
+  }
 
   apiList()  : void {
     this.router.navigate(['/']);

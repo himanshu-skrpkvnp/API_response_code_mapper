@@ -1,8 +1,48 @@
 <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
 
 <article class="table-header">
-    <button class="button-add-row" mat-button (click)="apiList()">Add New</button>
+    <button class="button-add-row" mat-button (click)="apiList()">SHOW API LIST</button>
 </article>
 
-<button mat-button (click)="openDialog()">Open dialog</button>
-
+<form #form="ngForm" (ngSubmit)="onSubmit( form )">
+    <div *ngFor="let row of formData.rows; let i = index" class="form-row">
+      <div class="form-group">
+        <label>ApiName:</label>
+        <input type="text" name="apiName{{i}}" [(ngModel)]="row.apiName" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>TestCase:</label>
+        <input type="text" name="testCase{{i}}" [(ngModel)]="row.testCase" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>Result:</label>
+        <select name="result{{i}}" [(ngModel)]="row.result" class="form-control">
+          <option [ngValue]="true">True</option>
+          <option [ngValue]="false">False</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message:</label>
+        <textarea name="message{{i}}" [(ngModel)]="row.message" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Profile:</label>
+        <select name="profile{{i}}" [(ngModel)]="row.profile" class="form-control">
+          <option [ngValue]="true">True</option>
+          <option [ngValue]="false">False</option>
+        </select>
+      </div>
+      <div *ngIf="row.profile" class="form-group">
+        <label>Profile Strategy:</label>
+        <select name="profileStrategy{{i}}" [(ngModel)]="row.profileStrategy" class="form-control">
+          <option value="static">Static</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+    </div>
+    <div class="buttons-container">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" (click)="onCancel()" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
+  
