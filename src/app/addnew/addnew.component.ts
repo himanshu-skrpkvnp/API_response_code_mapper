@@ -5,6 +5,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, NgForm} from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { SharedService } from '../shared.service';
+
 
 
 interface FormRow {
@@ -28,19 +30,19 @@ export class AddnewComponent {
 
   
   formData: { rows: FormRow[] } = { rows: [] };
-
-  // constructor() {
-  //   this.addNewRow();
-  // }
-  constructor(private router: Router) {
+  // private   dataService  ;
+  
+  
+  constructor(private dataService : SharedService , private router : Router ) {
     this.addNewRow();
+    //  this.dataService =  SharedService ; 
   }
 
   addNewRow(): void {
     this.formData.rows.push({
       apiName: '',
       testCase: '',
-      result: true,
+      result: false,
       message: '',
       profile: false
     });
@@ -48,12 +50,21 @@ export class AddnewComponent {
 
   onSubmit(form: NgForm): void {
     // Handle form submission logic here
+
     console.log('Form submitted:', this.formData);
+    this.dataService.updateFormData(this.formData);
+
+    console.log("after submitting ") ;
+    console.log( this.dataService.formDataSubject) ;
   }
 
   onCancel(): void {
-    // Handle cancel button click logic here
-    console.log('Form cancelled');
+      
+    this.formData.rows[0].apiName = '' ;
+    this.formData.rows[0].result = false ;
+    this.formData.rows[0].testCase = '' ;
+    this.formData.rows[0].message = '' ;
+    this.formData.rows[0].profile = false ;
   }
 
   onProfileChange(event: any, index: number): void {
