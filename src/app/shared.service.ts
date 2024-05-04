@@ -16,6 +16,8 @@ export class SharedService {
     this.formDataSubject.next(data);
   }
 
-
+  getData$(): Observable<string> {
+    return this.formDataSubject.asObservable();
+  }
 
 }
