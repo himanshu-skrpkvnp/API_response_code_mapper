@@ -20,7 +20,7 @@ export interface PeriodicElement {
 }
 
   var ELEMENT_DATA: PeriodicElement[] = [
-  
+
 
 ];
 
@@ -59,7 +59,7 @@ export class MainComponent {
         ProfileStrategy: data.rows[0].ProfileStrategy ,
         editMode : false
       };
-      this.dataSource.push( newRow ); // Push data object into dataSource array
+      this.dataSource.push( newRow ); 
     });
     
    }
