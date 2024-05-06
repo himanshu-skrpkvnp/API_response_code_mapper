@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {MatTableModule , MatTable} from '@angular/material/table';
 import { RouterModule, Router, RouterLink } from '@angular/router';
 import { SharedService } from '../shared.service';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 
 
@@ -52,7 +52,7 @@ export class MainComponent {
 
    ngOnInit() : void {
     // private formDataSubscription : Subscription ;
-    this.formDataSubscription = this.dataService.formDataSubject.subscribe(data => {
+    this.formDataSubscription = this.dataService.formDataSubject.pipe(take(1)).subscribe(data => {
       var newRow = {
         ApiName: data.rows[0].ApiName,
         TestCase: data.rows[0].TestCase,
