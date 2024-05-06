@@ -1,119 +1,108 @@
 <article class="table-header">
-    <button class="button-add-row" mat-button (click)="addNew()">Add New</button>
+  <button class="button-add-row" mat-button (click)="addNew()">Add New</button>
 </article>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
 
-   
+  <!-- Actions Column -->
+  <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element?.editMode; else editMode2">
+          <button mat-raised-button (click)="toggleEditMode(element)" style="background-color: blue">Edit</button>
+          <button mat-raised-button (click)="onDelete(element)" style="background-color: red ;">Delete</button>
+        </ng-container>
+        <ng-template #editMode2>
+          <button mat-raised-button (click)="toggleEditMode(element)" style="background-color: rgb(47, 128, 0);">Save</button>
+          <!-- <button mat-raised-button (click)="onDelete(element)">Delete</button> -->
+        </ng-template>
 
 
-    <ng-container matColumnDef="Actions">
-        <!-- <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button (click)="onEdit(element)">Edit</button>
-          <button mat-raised-button (click)="onDelete(element)">Delete</button>
-        </td> -->
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button (click)="toggleEditMode(element)">Edit</button>
-          <button mat-raised-button (click)="onDelete(element)">Delete</button>
-        </td>
-    </ng-container>
+      </td>
+  </ng-container>
 
-    <ng-container matColumnDef="ApiName">
-      <!-- <th mat-header-cell *matHeaderCellDef> ApiName </th>
-      <td mat-cell *matCellDef="let element"> {{element.ApiName}} </td> -->
+  <!-- ApiName Column -->
+  <ng-container matColumnDef="ApiName">
       <th mat-header-cell *matHeaderCellDef> ApiName </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!element.editMode; else editModeTemplate">
-          {{ element.ApiName }}
-        </ng-container>
-        <ng-template #editModeTemplate>
-          <input type="String" [(ngModel)]="element.ApiName" (blur)="onFieldBlur(element)">
-        </ng-template>
+          <ng-container *ngIf="!element?.editMode; else editModeTemplate">
+              {{ element?.ApiName }}
+          </ng-container>
+          <ng-template #editModeTemplate >
+              <input type="text" [(ngModel)]="element.ApiName" (blur)="onFieldBlur(element) "  >
+          </ng-template>
       </td>
+  </ng-container>
 
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="TestCase">
-      <!-- <th mat-header-cell *matHeaderCellDef> TestCase </th>
-      <td mat-cell *matCellDef="let element"> {{element.TestCase}} </td> -->
+  <!-- TestCase Column -->
+  <ng-container matColumnDef="TestCase">
       <th mat-header-cell *matHeaderCellDef> TestCase </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!element.editMode; else editModeTemplate">
-          {{ element.TestCase }}
-        </ng-container>
-        <ng-template #editModeTemplate>
-          <input type="String" [(ngModel)]="element.TestCase" (blur)="onFieldBlur(element)">
-        </ng-template>
+          <ng-container *ngIf="!element?.editMode; else editModeTemplate">
+              {{ element?.TestCase }}
+          </ng-container>
+          <ng-template #editModeTemplate>
+              <input type="text" [(ngModel)]="element.TestCase" (blur)="onFieldBlur(element)">
+          </ng-template>
       </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="Result">
-      <!-- <th mat-header-cell *matHeaderCellDef> Result </th>
-      <td mat-cell *matCellDef="let element"> {{element.Result}} </td> -->
+  </ng-container>
+
+  <!-- Result Column -->
+  <ng-container matColumnDef="Result">
       <th mat-header-cell *matHeaderCellDef> Result </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!element.editMode; else editModeTemplate">
-          {{ element.Result }}
-        </ng-container>
-        <ng-template #editModeTemplate>
-          <input type="String" [(ngModel)]="element.Result" (blur)="onFieldBlur(element)">
-        </ng-template>
+          <ng-container *ngIf="!element?.editMode; else editModeTemplate">
+              {{ element?.Result }}
+          </ng-container>
+          <ng-template #editModeTemplate>
+              <input type="text" [(ngModel)]="element.Result" (blur)="onFieldBlur(element)">
+          </ng-template>
       </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="Message">
-      <!-- <th mat-header-cell *matHeaderCellDef>Message</th>
-      <td mat-cell *matCellDef="let element"> {{element.Message}} </td> -->
+  </ng-container>
+
+  <!-- Message Column -->
+  <ng-container matColumnDef="Message">
       <th mat-header-cell *matHeaderCellDef> Message </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!element.editMode; else editModeTemplate">
-          {{ element.Message }}
-        </ng-container>
-        <ng-template #editModeTemplate>
-          <input type="String" [(ngModel)]="element.Message" (blur)="onFieldBlur(element)">
-        </ng-template>
+          <ng-container *ngIf="!element?.editMode; else editModeTemplate">
+              {{ element?.Message }}
+          </ng-container>
+          <ng-template #editModeTemplate>
+              <input type="text" [(ngModel)]="element.Message" (blur)="onFieldBlur(element)">
+          </ng-template>
       </td>
-    </ng-container>
+  </ng-container>
 
-    <ng-container matColumnDef="Profile">
-        <!-- <th mat-header-cell *matHeaderCellDef> Profile </th>
-        <td mat-cell *matCellDef="let element"> {{element.Profile}} </td> -->
-        <th mat-header-cell *matHeaderCellDef> Profile </th>
+  <!-- Profile Column -->
+  <ng-container matColumnDef="Profile">
+      <th mat-header-cell *matHeaderCellDef> Profile </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!element.editMode; else editModeTemplate">
-          {{ element.Profile }}
-        </ng-container>
-        <ng-template #editModeTemplate>
-          <input type="String" [(ngModel)]="element.Profile" (blur)="onFieldBlur(element)">
-        </ng-template>
+          <ng-container *ngIf="!element?.editMode; else editModeTemplate">
+              {{ element?.Profile }}
+          </ng-container>
+          <ng-template #editModeTemplate>
+              <input type="text" [(ngModel)]="element.Profile" (blur)="onFieldBlur(element)">
+          </ng-template>
       </td>
-      </ng-container>
+  </ng-container>
 
-      <ng-container matColumnDef="ProfileStrategy">
-        <!-- <th mat-header-cell *matHeaderCellDef> ProfileStrategy </th>
-        <td mat-cell *matCellDef="let element"> {{element.ProfileStrategy}} </td> -->
-        <th mat-header-cell *matHeaderCellDef> ProfileStrategy </th>
+  <!-- ProfileStrategy Column -->
+  <ng-container matColumnDef="ProfileStrategy">
+      <th mat-header-cell *matHeaderCellDef> ProfileStrategy </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!element.editMode; else editModeTemplate">
-          {{ element.ProfileStrategy }}
-        </ng-container>
-        <ng-template #editModeTemplate>
-          <input type="String" [(ngModel)]="element.ProfileStrategy" (blur)="onFieldBlur(element)">
-        </ng-template>
+          <ng-container *ngIf="!element?.editMode; else editModeTemplate">
+              {{ element?.ProfileStrategy }}
+          </ng-container>
+          <ng-template #editModeTemplate>
+              <input type="text" [(ngModel)]="element.ProfileStrategy" (blur)="onFieldBlur(element)">
+          </ng-template>
       </td>
-      </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
-  
+  </ng-container>
+
+  <!-- Header and Row Definitions -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

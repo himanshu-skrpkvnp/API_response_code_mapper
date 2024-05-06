@@ -19,7 +19,7 @@ export interface PeriodicElement {
   editMode : boolean ;
 }
 
- const ELEMENT_DATA: PeriodicElement[] = [
+  var ELEMENT_DATA: PeriodicElement[] = [
   { ApiName  : "ApiReqVal" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static'  , editMode : false },
   { ApiName  : "ApiReqVal2" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static' , editMode : false},
   { ApiName  : "ApiReqVal3" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static' , editMode : false},
@@ -44,10 +44,23 @@ export class MainComponent {
   private formDataSubscription : Subscription ;
   
   constructor(private router: Router , private dataService : SharedService) {
-     
+   
     // logic for the added data to be displayed 
     this.formDataSubscription = this.dataService.formData$.subscribe(data => {
-      this.dataSource.push(data); 
+      var newRow = {
+        ApiName: data.rows[0].ApiName,
+        TestCase: data.rows[0].TestCase,
+        Result: data.rows[0].Result,
+        Message: data.rows[0].Message,
+        Profile: data.rows[0].Profile,
+        ProfileStrategy: data.rows[0].ProfileStrategy ,
+        editMode : false
+      };
+      this.dataSource.push( newRow ); // Push data object into dataSource array
+      // console.log("this is datasource", this.dataSource)
+      // if (this.table) {
+      //   this.table.renderRows(); // Render rows if table exists
+      // }
     });
   }
 

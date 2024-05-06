@@ -4,7 +4,7 @@
     <button class="button-add-row" mat-button (click)="apiList()">SHOW API LIST</button>
 </article>
 
-<form #form="ngForm" (ngSubmit)="onSubmit( form )">
+<form #form="ngForm" (ngSubmit)="onSubmit( form )" >
     <div *ngFor="let row of formData.rows; let i = index" class="form-row">
       <div class="form-group">
         <label>ApiName:</label>
