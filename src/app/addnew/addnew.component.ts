@@ -10,12 +10,12 @@ import { SharedService } from '../shared.service';
 
 
 interface FormRow {
-  apiName: string;
-  testCase: string;
-  result: boolean;
-  message: string;
-  profile: boolean;
-  profileStrategy?: string;
+  ApiName: string;
+  TestCase: string;
+  Result: boolean;
+  Message: string;
+  Profile: boolean;
+  ProfileStrategy?: string;
 }
 
 @Component({
@@ -30,7 +30,7 @@ export class AddnewComponent {
 
   
   formData: { rows: FormRow[] } = { rows: [] };
-  // private   dataService  ;
+  
   
   
   constructor(private dataService : SharedService , private router : Router ) {
@@ -40,11 +40,11 @@ export class AddnewComponent {
 
   addNewRow(): void {
     this.formData.rows.push({
-      apiName: '',
-      testCase: '',
-      result: false,
-      message: '',
-      profile: false
+      ApiName: '',
+      TestCase: '',
+      Result: false,
+      Message: '',
+      Profile: false
     });
   }
 
@@ -56,23 +56,28 @@ export class AddnewComponent {
 
     console.log("after submitting ") ;
     console.log( this.dataService.formDataSubject) ;
+    
+
+    // routing to the api list page 
+    this.router.navigate(['/']);
   }
 
   onCancel(): void {
       
-    this.formData.rows[0].apiName = '' ;
-    this.formData.rows[0].result = false ;
-    this.formData.rows[0].testCase = '' ;
-    this.formData.rows[0].message = '' ;
-    this.formData.rows[0].profile = false ;
+    this.formData.rows[0].ApiName = '' ;
+    this.formData.rows[0].Result = false ;
+    this.formData.rows[0].TestCase = '' ;
+    this.formData.rows[0].Message = '' ;
+    this.formData.rows[0].Profile = false ;
+    
   }
 
   onProfileChange(event: any, index: number): void {
     if (event.target.value === 'true') {
-      this.formData.rows[index].profile = true;
+      this.formData.rows[index].Profile = true;
     } else {
-      this.formData.rows[index].profile = false;
-      this.formData.rows[index].profileStrategy = undefined;
+      this.formData.rows[index].Profile = false;
+      this.formData.rows[index].ProfileStrategy = undefined;
     }
   }
 

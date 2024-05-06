@@ -8,33 +8,33 @@
     <div *ngFor="let row of formData.rows; let i = index" class="form-row">
       <div class="form-group">
         <label>ApiName:</label>
-        <input type="text" name="apiName{{i}}" [(ngModel)]="row.apiName" class="form-control" required>
+        <input type="text" name="apiName{{i}}" [(ngModel)]="row.ApiName" class="form-control" required>
       </div>
       <div class="form-group">
         <label>TestCase:</label>
-        <input type="text" name="testCase{{i}}" [(ngModel)]="row.testCase" class="form-control" required>
+        <input type="text" name="testCase{{i}}" [(ngModel)]="row.TestCase" class="form-control" required>
       </div>
       <div class="form-group">
         <label>Result:</label>
-        <select name="result{{i}}" [(ngModel)]="row.result" class="form-control">
+        <select name="result{{i}}" [(ngModel)]="row.Result" class="form-control">
           <option [ngValue]="true">True</option>
           <option [ngValue]="false">False</option>
         </select>
       </div>
       <div class="form-group">
         <label>Message:</label>
-        <textarea name="message{{i}}" [(ngModel)]="row.message" class="form-control"></textarea>
+        <textarea name="message{{i}}" [(ngModel)]="row.Message" class="form-control"></textarea>
       </div>
       <div class="form-group">
         <label>Profile:</label>
-        <select name="profile{{i}}" [(ngModel)]="row.profile" class="form-control">
+        <select name="profile{{i}}" [(ngModel)]="row.Profile" class="form-control">
           <option [ngValue]="true">True</option>
           <option [ngValue]="false">False</option>
         </select>
       </div>
-      <div *ngIf="row.profile" class="form-group">
+      <div *ngIf="row.Profile" class="form-group">
         <label>Profile Strategy:</label>
-        <select name="profileStrategy{{i}}" [(ngModel)]="row.profileStrategy" class="form-control">
+        <select name="profileStrategy{{i}}" [(ngModel)]="row.ProfileStrategy" class="form-control">
           <option value="static">Static</option>
           <option value="random">Random</option>
         </select>
@@ -42,7 +42,7 @@
     </div>
     <div class="buttons-container">
     <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" (click)="onCancel()" class="btn btn-secondary">Cancel</button>
+    <button type="button" (click)="onCancel()" class="btn btn-secondary">Clear</button>
     </div>
   </form>
   

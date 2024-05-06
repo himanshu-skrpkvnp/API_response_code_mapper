@@ -3,6 +3,8 @@ import { Component  , ViewChild} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {MatTableModule , MatTable} from '@angular/material/table';
 import { RouterModule, Router, RouterLink } from '@angular/router';
+import { SharedService } from '../shared.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -37,11 +39,25 @@ export class MainComponent {
 
   displayedColumns: string[] = ['Actions', 'ApiName', 'TestCase', 'Result', 'Message' , 'Profile' , 'ProfileStrategy'];
   dataSource = ELEMENT_DATA;
-  @ViewChild(MatTable) table: MatTable<PeriodicElement> | undefined;
   
-  constructor(private router: Router) {
-   
+  @ViewChild(MatTable) table: MatTable<PeriodicElement> | undefined;
+  private formDataSubscription : Subscription ;
+  
+  constructor(private router: Router , private dataService : SharedService) {
+     
+    // logic for the added data to be displayed 
+    this.formDataSubscription = this.dataService.formData$.subscribe(data => {
+      this.dataSource.push(data); 
+    });
   }
+
+
+   // 
+  //  ngOnInit() {
+  //   this.formDataSubscription = this.dataService.formData$.subscribe(data => {
+  //     this.dataSource.push(data); 
+  //   });
+  //  }
 
   onEdit(element: PeriodicElement): void {
     // const indexToDelete = this.dataSource.findIndex(
@@ -51,6 +67,7 @@ export class MainComponent {
     // this.dataSource = ELEMENT_DATA;
     // this.table.renderRows();
   }
+
 
   toggleEditMode(element: PeriodicElement): void {
     element.editMode = !element.editMode;
@@ -82,6 +99,13 @@ export class MainComponent {
     console.log( element ) ;
     console.log( ELEMENT_DATA  )
   }
+   
+  ngOnDistroy() {
+     this.formDataSubscription.unsubscribe() ;
+  }
+ 
+
+  
 }
 
  
