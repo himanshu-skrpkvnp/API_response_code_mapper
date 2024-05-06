@@ -8,7 +8,7 @@ export class SharedService {
 
   
   public formDataSubject = new Subject<any>(  );
-  formData$: Observable<any> = this.formDataSubject.asObservable();
+  // formData$: Observable<any> = this.formDataSubject.asObservable();
 
   constructor() { }
 

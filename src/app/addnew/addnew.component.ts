@@ -50,16 +50,10 @@ export class AddnewComponent {
 
   onSubmit(form: NgForm): void {
     // Handle form submission logic here
+ this.dataService.updateFormData(this.formData);
 
-    console.log('Form submitted:', this.formData);
-    this.dataService.updateFormData(this.formData);
-
-    console.log("after submitting ") ;
-    console.log( this.dataService.formDataSubject) ;
-    
-
-    // routing to the api list page 
-    this.router.navigate(['/']);
+    console.log("after submitting " , this.dataService.formDataSubject ) ;
+   this.router.navigate(['/']);
   }
 
   onCancel(): void {

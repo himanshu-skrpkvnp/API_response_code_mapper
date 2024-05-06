@@ -41,12 +41,18 @@ export class MainComponent {
   dataSource = ELEMENT_DATA;
   
   @ViewChild(MatTable) table: MatTable<PeriodicElement> | undefined;
-  private formDataSubscription : Subscription ;
+  private formDataSubscription : Subscription  | undefined;
+
   
   constructor(private router: Router , private dataService : SharedService) {
    
-    // logic for the added data to be displayed 
-    this.formDataSubscription = this.dataService.formData$.subscribe(data => {
+    // this.formDataSubscription = undefined;
+     
+  }
+
+   ngOnInit() : void {
+    // private formDataSubscription : Subscription ;
+    this.formDataSubscription = this.dataService.formDataSubject.subscribe(data => {
       var newRow = {
         ApiName: data.rows[0].ApiName,
         TestCase: data.rows[0].TestCase,
@@ -57,28 +63,12 @@ export class MainComponent {
         editMode : false
       };
       this.dataSource.push( newRow ); // Push data object into dataSource array
-      // console.log("this is datasource", this.dataSource)
-      // if (this.table) {
-      //   this.table.renderRows(); // Render rows if table exists
-      // }
     });
-  }
-
-
-   // 
-  //  ngOnInit() {
-  //   this.formDataSubscription = this.dataService.formData$.subscribe(data => {
-  //     this.dataSource.push(data); 
-  //   });
-  //  }
+    
+   }
 
   onEdit(element: PeriodicElement): void {
-    // const indexToDelete = this.dataSource.findIndex(
-    //   (periodicElement) => periodicElement.position === element.position
-    // );
-    // ELEMENT_DATA.splice(indexToDelete, 1);
-    // this.dataSource = ELEMENT_DATA;
-    // this.table.renderRows();
+  
   }
 
 
@@ -114,7 +104,9 @@ export class MainComponent {
   }
    
   ngOnDistroy() {
+    if( this.formDataSubscription)
      this.formDataSubscription.unsubscribe() ;
+   
   }
  
 
