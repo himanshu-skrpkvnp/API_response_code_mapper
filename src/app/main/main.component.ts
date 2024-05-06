@@ -20,9 +20,6 @@ export interface PeriodicElement {
 }
 
   var ELEMENT_DATA: PeriodicElement[] = [
-  { ApiName  : "ApiReqVal" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static'  , editMode : false },
-  { ApiName  : "ApiReqVal2" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static' , editMode : false},
-  { ApiName  : "ApiReqVal3" , TestCase : '000',  Result : 'True',  Message : 'H'  ,Profile : 'True' , ProfileStrategy : 'static' , editMode : false},
   
 
 ];
