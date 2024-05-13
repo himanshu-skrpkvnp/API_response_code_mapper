@@ -1,3 +1,21 @@
+
+.button-add-row {
+  margin-right: 10px;
+  background-color: #007bff; /* Blue background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 8px 16px; /* Padding */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Cursor style */
+  transition: background-color 0.3s; /* Smooth transition */
+  width: 25%;
+}
+
+.button-add-row:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}  
+
 .form-container {
     max-width: 500px; /* Adjust as needed */
     margin:  auto; /* Center the form horizontally */
