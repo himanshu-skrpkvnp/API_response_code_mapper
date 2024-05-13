@@ -1,16 +1,21 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component  , ViewChild} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {  ViewChild} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule , MatTable} from '@angular/material/table';
 import { RouterModule, Router, RouterLink } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { Subscription, take } from 'rxjs';
-
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';  
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+// import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
 export interface PeriodicElement {
-  ApiName : String ;
+  ApiName : String;
   TestCase : String ;
   Result : String ;
   Message : String ;
@@ -29,16 +34,19 @@ export interface PeriodicElement {
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'] ,
   standalone: true,
-  imports: [MatTableModule  ,  FormsModule , NgIf , CommonModule],
+  imports: [MatTableModule  ,  FormsModule , NgIf , CommonModule , MatFormFieldModule , MatInputModule , MatIconModule ],
 })
 
 export class MainComponent {
 
+
   displayedColumns: string[] = ['Actions', 'ApiName', 'TestCase', 'Result', 'Message' , 'Profile' , 'ProfileStrategy'];
-  dataSource = ELEMENT_DATA;
+  dataSource = ELEMENT_DATA ;
   
   @ViewChild(MatTable) table: MatTable<PeriodicElement> | undefined;
   private formDataSubscription : Subscription  | undefined;
+filter: any;
+value: any;
 
   
   constructor(private router: Router , private dataService : SharedService) {
@@ -49,6 +57,9 @@ export class MainComponent {
 
    ngOnInit() : void {
     // private formDataSubscription : Subscription ;
+
+
+    
     this.formDataSubscription = this.dataService.formDataSubject.pipe(take(1)).subscribe(data => {
       var newRow = {
         ApiName: data.rows[0].ApiName,
@@ -105,7 +116,14 @@ export class MainComponent {
      this.formDataSubscription.unsubscribe() ;
    
   }
- 
+  customFilterPredicate(data: any, filter: string): boolean {
+    let searchString = JSON.parse(filter);
+    return data.name.toString().trim().indexOf(searchString.name) !== -1 &&
+           data.department.toString().trim().indexOf(searchString.department) !== -1;
+  }
+  applyfilter( event : Event ){
+     
+  }
 }
 
  

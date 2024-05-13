@@ -1,4 +1,25 @@
 table {
     width: 100%;
   }
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1 ;
+  }
   
+  /* Adjust margin if necessary */
+  .button-add-row {
+    margin-right: 10px;
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 16px; /* Padding */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .button-add-row:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }  
