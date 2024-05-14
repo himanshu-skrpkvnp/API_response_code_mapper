@@ -60,8 +60,7 @@ export class MainComponent {
   }
 
    ngOnInit() : void {
-    // private formDataSubscription : Subscription ;
-    this.dataSource.filterPredicate = ( data : PeriodicElement , filter : string ) => {
+     this.dataSource.filterPredicate = ( data : PeriodicElement , filter : string ) => {
      return   data.ApiName.trim().toLowerCase().indexOf(filter) != -1;
     }
     
@@ -137,7 +136,7 @@ export class MainComponent {
      const value = ( event.target as HTMLInputElement ).value ;
      if( value !==  null && value !== undefined  ){
             
-       var  filtervalue = value.trim() ;
+        var  filtervalue = value.trim() ;
         filtervalue = filtervalue.toLowerCase() ;
         this.dataSource.filter = filtervalue;
 
