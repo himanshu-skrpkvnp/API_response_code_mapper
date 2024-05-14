@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';  
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import { Pipe , PipeTransform } from '@angular/core';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 
 
@@ -41,12 +42,15 @@ export class MainComponent {
 
 
   displayedColumns: string[] = ['Actions', 'ApiName', 'TestCase', 'Result', 'Message' , 'Profile' , 'ProfileStrategy'];
-  dataSource = ELEMENT_DATA ;
+  // dataSource = ELEMENT_DATA ;
   
-  @ViewChild(MatTable) table: MatTable<PeriodicElement> | undefined;
+  dataSource = new MatTableDataSource<PeriodicElement>( ELEMENT_DATA );
+
+  
+  @ViewChild(MatTable) table: MatTable<Element> | undefined;
   private formDataSubscription : Subscription  | undefined;
-filter: any;
-value: any;
+  filter: any;
+  value: any;
 
   
   constructor(private router: Router , private dataService : SharedService) {
@@ -57,8 +61,9 @@ value: any;
 
    ngOnInit() : void {
     // private formDataSubscription : Subscription ;
-
-
+    this.dataSource.filterPredicate = ( data : PeriodicElement , filter : string ) => {
+     return   data.ApiName.trim().toLowerCase().indexOf(filter) != -1;
+    }
     
     this.formDataSubscription = this.dataService.formDataSubject.pipe(take(1)).subscribe(data => {
       var newRow = {
@@ -70,7 +75,9 @@ value: any;
         ProfileStrategy: data.rows[0].ProfileStrategy ,
         editMode : false
       };
-      this.dataSource.push( newRow ); // Push data object into dataSource array
+      const currentData = this.dataSource.data;
+      currentData.push(newRow);
+      this.dataSource.data = currentData; // Push data object into dataSource array
     });
     
    }
@@ -86,14 +93,21 @@ value: any;
   
 
   onDelete(element: PeriodicElement): void {
-    const indexToDelete = this.dataSource.findIndex(
-      (PeriodicElement) => PeriodicElement.ApiName === element.ApiName
+    const indexToDelete = this.dataSource.data.findIndex(
+      (item) => item.ApiName === element.ApiName
     );
-    if( indexToDelete != -1  )
-    {ELEMENT_DATA.splice(indexToDelete, 1);
-    this.dataSource = ELEMENT_DATA;
-    if( this.table != undefined) this.table.renderRows();
-    console.log( ELEMENT_DATA.length ) ;
+    
+    if (indexToDelete !== -1) {
+        const newData = this.dataSource.data.slice();
+      
+       newData.splice(indexToDelete, 1);
+      
+      this.dataSource.data = newData;
+      
+       if (this.table) {
+        this.table.renderRows();
+      }
+      console.log(newData.length);
     }
   }
 
@@ -116,14 +130,21 @@ value: any;
      this.formDataSubscription.unsubscribe() ;
    
   }
-  customFilterPredicate(data: any, filter: string): boolean {
-    let searchString = JSON.parse(filter);
-    return data.name.toString().trim().indexOf(searchString.name) !== -1 &&
-           data.department.toString().trim().indexOf(searchString.department) !== -1;
+
+  
+  
+  applyfilter( event : KeyboardEvent ){
+     const value = ( event.target as HTMLInputElement ).value ;
+     if( value !==  null && value !== undefined  ){
+            
+       var  filtervalue = value.trim() ;
+        filtervalue = filtervalue.toLowerCase() ;
+        this.dataSource.filter = filtervalue;
+
+     }
+       
   }
-  applyfilter( event : Event ){
-     
-  }
+  
 }
 
  
