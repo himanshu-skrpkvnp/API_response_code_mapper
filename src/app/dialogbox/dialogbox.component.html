@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>Edit</h2>
+
+<mat-dialog-content>
+  <form>
+    <!-- Input fields -->
+    <div class="form-field" >
+        <mat-form-field>
+            <mat-label>ApiName</mat-label>
+            <input matInput  [(ngModel)] = "data.ApiName" >
+          </mat-form-field>
+    </div>
+    
+    <div class="form-field" >
+        <mat-form-field>
+            <mat-label>TestCase</mat-label>
+            <input matInput [(ngModel)] = "data.TestCase" >
+          </mat-form-field>
+    </div>
+    
+    <div>
+        <label>Result</label>
+        <mat-radio-group  [(ngModel)] = "data.Result">
+          <mat-radio-button value="true">True</mat-radio-button>
+          <mat-radio-button value="false">False</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+    <div class="form-field">
+        <mat-form-field>
+            <mat-label>Message</mat-label>
+            <input matInput [(ngModel)] = "data.Message">
+        </mat-form-field>
+    </div>
+    
+
+     <div>
+      <label>Profile:</label>
+      <mat-radio-group [(ngModel)]="data.Profile" name="normalRadioButton">
+        <mat-radio-button [value]="true">True</mat-radio-button>
+        <mat-radio-button [value]="false">False</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Conditional Radio Button, displayed based on normalRadioButton value -->
+    <div *ngIf="normalRadioButton">
+      <label>ProfileStrategy:</label>
+      <mat-radio-group [(ngModel)] = "data.ProfileStrategy">
+        <mat-radio-button value="static">Static</mat-radio-button>
+        <mat-radio-button value="random">Random</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

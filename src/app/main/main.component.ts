@@ -11,6 +11,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { Pipe , PipeTransform } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 
 
@@ -55,7 +57,7 @@ export class MainComponent  implements OnInit{
   
 
   
-  constructor(private router: Router , private dataService : SharedService) {
+  constructor(private router: Router , private dataService : SharedService , public dialog : MatDialog ) {
    
     // this.formDataSubscription = undefined;
      
@@ -110,6 +112,7 @@ export class MainComponent  implements OnInit{
       }
       console.log(newData.length);
     }
+    
   }
 
   addNew() : void {
@@ -144,8 +147,27 @@ export class MainComponent  implements OnInit{
         this.dataSource.filter = filtervalue;
 
      }
-       
-  }
+      
+    }
+
+   openEditDialog( row_obj : any ) {
+    let dialogRef = this.dialog.open(DialogboxComponent , { width : '500px'  , 
+        data: {  
+          ApiName : row_obj.ApiName ,
+          TestCase : row_obj.TestCase ,
+          Result : row_obj.Result ,
+          Message : row_obj.Message ,
+          Profile : row_obj.Profile ,
+          ProfileStrategy : row_obj.ProfileStrategy 
+
+          }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+   }
+
   
 }
 

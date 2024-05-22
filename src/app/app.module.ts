@@ -9,6 +9,9 @@ import {MatTableModule} from '@angular/material/table';
 import { RouterModule, Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DialogboxComponent } from './dialogbox/dialogbox.component';
+import { MatDialogActions } from '@angular/material/dialog';
+// import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 
 
 
@@ -22,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule , 
     MatTableModule , 
     MainComponent , 
-    CommonModule, RouterOutlet, RouterLink, RouterLinkActive  , AddnewComponent
+    CommonModule, RouterOutlet, RouterLink, RouterLinkActive  , AddnewComponent , DialogboxComponent  
   ],
   providers: [],
   bootstrap: [AppComponent]

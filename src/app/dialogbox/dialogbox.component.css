@@ -1,0 +1,5 @@
+mat-form-field,
+mat-radio-group {
+  display: block;
+  width: 100%;
+}
