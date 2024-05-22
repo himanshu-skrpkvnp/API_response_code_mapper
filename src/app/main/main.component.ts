@@ -1,6 +1,6 @@
 import { CommonModule, NgIf } from '@angular/common';
 import {  ViewChild} from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule , FormControl } from '@angular/forms';
 import {MatTableModule , MatTable} from '@angular/material/table';
 import { RouterModule, Router, RouterLink } from '@angular/router';
 import { SharedService } from '../shared.service';
@@ -38,19 +38,21 @@ export interface PeriodicElement {
   imports: [MatTableModule  ,  FormsModule , NgIf , CommonModule , MatFormFieldModule , MatInputModule , MatIconModule ],
 })
 
-export class MainComponent {
+export class MainComponent  implements OnInit{
 
 
   displayedColumns: string[] = ['Actions', 'ApiName', 'TestCase', 'Result', 'Message' , 'Profile' , 'ProfileStrategy'];
   // dataSource = ELEMENT_DATA ;
   
   dataSource = new MatTableDataSource<PeriodicElement>( ELEMENT_DATA );
+  public searchForm: FormGroup | undefined;
 
   
   @ViewChild(MatTable) table: MatTable<Element> | undefined;
   private formDataSubscription : Subscription  | undefined;
   filter: any;
   value: any;
+  
 
   
   constructor(private router: Router , private dataService : SharedService) {
@@ -134,6 +136,7 @@ export class MainComponent {
   
   applyfilter( event : KeyboardEvent ){
      const value = ( event.target as HTMLInputElement ).value ;
+     
      if( value !==  null && value !== undefined  ){
             
         var  filtervalue = value.trim() ;
