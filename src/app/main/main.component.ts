@@ -151,6 +151,7 @@ export class MainComponent  implements OnInit{
     }
 
    openEditDialog( row_obj : any ) {
+    var data : any ;
     let dialogRef = this.dialog.open(DialogboxComponent , { width : '500px'  , 
         data: {  
           ApiName : row_obj.ApiName ,
@@ -158,13 +159,26 @@ export class MainComponent  implements OnInit{
           Result : row_obj.Result ,
           Message : row_obj.Message ,
           Profile : row_obj.Profile ,
-          ProfileStrategy : row_obj.ProfileStrategy 
+          ProfileStrategy : row_obj.ProfileStrategy , 
 
           }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log( row_obj.ApiName ) ;
+      if (result) {
+        const index = this.dataSource.data.findIndex(
+          (item) => item.ApiName === row_obj.ApiName
+        );
+        if (index !== -1) {
+          this.dataSource.data[index] = row_obj ;
+          console.log( row_obj  ) ;
+          this.dataSource = new MatTableDataSource(this.dataSource.data);
+          if (this.table) {
+            this.table.renderRows();
+          }
+        }
+      }
     });
    }
 

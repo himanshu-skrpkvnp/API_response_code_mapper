@@ -6,45 +6,45 @@
     <div class="form-field" >
         <mat-form-field>
             <mat-label>ApiName</mat-label>
-            <input matInput  [(ngModel)] = "data.ApiName" >
+            <input matInput  [(ngModel)] = "data.ApiName" [ngModelOptions]="{standalone: true}" >
           </mat-form-field>
     </div>
     
     <div class="form-field" >
         <mat-form-field>
             <mat-label>TestCase</mat-label>
-            <input matInput [(ngModel)] = "data.TestCase" >
+            <input matInput [(ngModel)] = "data.TestCase" [ngModelOptions]="{standalone: true}" >
           </mat-form-field>
     </div>
     
     <div>
         <label>Result</label>
-        <mat-radio-group  [(ngModel)] = "data.Result">
-          <mat-radio-button value="true">True</mat-radio-button>
-          <mat-radio-button value="false">False</mat-radio-button>
+        <mat-radio-group  [(ngModel)] = "data.Result" [ngModelOptions]="{standalone: true}" >
+          <mat-radio-button [value] ="true">True</mat-radio-button>
+          <mat-radio-button [value] ="false">False</mat-radio-button>
         </mat-radio-group>
       </div>
 
     <div class="form-field">
         <mat-form-field>
             <mat-label>Message</mat-label>
-            <input matInput [(ngModel)] = "data.Message">
+            <input matInput [(ngModel)] = "data.Message" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
     </div>
     
 
      <div>
       <label>Profile:</label>
-      <mat-radio-group [(ngModel)]="data.Profile" name="normalRadioButton">
+      <mat-radio-group [(ngModel)]="data.Profile" name="normalRadioButton" [ngModelOptions]="{standalone: true}" >
         <mat-radio-button [value]="true">True</mat-radio-button>
         <mat-radio-button [value]="false">False</mat-radio-button>
       </mat-radio-group>
     </div>
 
     <!-- Conditional Radio Button, displayed based on normalRadioButton value -->
-    <div *ngIf="normalRadioButton">
+    <div *ngIf="data.Profile">
       <label>ProfileStrategy:</label>
-      <mat-radio-group [(ngModel)] = "data.ProfileStrategy">
+      <mat-radio-group [(ngModel)] = "data.ProfileStrategy" [ngModelOptions]="{standalone: true}">
         <mat-radio-button value="static">Static</mat-radio-button>
         <mat-radio-button value="random">Random</mat-radio-button>
       </mat-radio-group>

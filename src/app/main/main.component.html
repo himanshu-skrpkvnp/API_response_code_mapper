@@ -37,7 +37,7 @@
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
         <ng-container *ngIf="!element?.editMode; else editMode2">
-          <button mat-raised-button (click)="openEditDialog( $event )" style="background-color: blue">Edit</button>
+          <button mat-raised-button (click)="openEditDialog(  element )" style="background-color: blue">Edit</button>
           <button mat-raised-button (click)="onDelete(element)" style="background-color: red ;">Delete</button>
         </ng-container>
         <ng-template #editMode2>
