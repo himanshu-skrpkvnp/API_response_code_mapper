@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 
 
 export class DialogboxComponent {
+
 normalRadioButton: boolean = false   ;
 
 
@@ -33,5 +34,10 @@ constructor(public dialogRef: MatDialogRef<DialogboxComponent>,
     save() : void {
        this.dialogRef.close( this.data ) 
     }
+
+    onProfileChange(newvalue : boolean ) : void  {
+          console.log(  "hii atul " + newvalue ) ;
+          if( !newvalue ) this.data.ProfileStrategy = '' ;
+      }
   
 }

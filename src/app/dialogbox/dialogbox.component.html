@@ -35,7 +35,7 @@
 
      <div>
       <label>Profile:</label>
-      <mat-radio-group [(ngModel)]="data.Profile" name="normalRadioButton" [ngModelOptions]="{standalone: true}" >
+      <mat-radio-group [(ngModel)]="data.Profile" name="normalRadioButton" (ngModelChange)="onProfileChange($event)" [ngModelOptions]="{standalone: true}" >
         <mat-radio-button [value]="true">True</mat-radio-button>
         <mat-radio-button [value]="false">False</mat-radio-button>
       </mat-radio-group>
