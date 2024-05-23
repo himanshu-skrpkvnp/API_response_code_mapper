@@ -25,13 +25,13 @@ normalRadioButton: boolean = false   ;
 
 constructor(public dialogRef: MatDialogRef<DialogboxComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any ) {
-
-    console.log(   data.ApiName  ) ;
-    console.log( data.Message ) ;
-    
+   
    }
    onNoClick(): void {
-    this.dialogRef.close( this.data );
+    this.dialogRef.close();
+    }
+    save() : void {
+       this.dialogRef.close( this.data ) 
     }
   
 }

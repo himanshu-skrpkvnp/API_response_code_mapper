@@ -163,16 +163,16 @@ export class MainComponent  implements OnInit{
 
           }
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log( row_obj.ApiName ) ;
+     
+    dialogRef.afterClosed().subscribe((result : PeriodicElement | undefined ) => {
+      // console.log(  result.data ) ;
       if (result) {
         const index = this.dataSource.data.findIndex(
           (item) => item.ApiName === row_obj.ApiName
         );
         if (index !== -1) {
-          this.dataSource.data[index] = row_obj ;
-          console.log( row_obj  ) ;
+          this.dataSource.data[index] =  result ;
+          console.log( result ) ;
           this.dataSource = new MatTableDataSource(this.dataSource.data);
           if (this.table) {
             this.table.renderRows();
