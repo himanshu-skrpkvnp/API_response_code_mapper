@@ -16,13 +16,16 @@ table {
     color: white; /* White text color */
     border: none; /* Remove border */
     border-radius: 5px; /* Rounded corners */
-    padding: 8px 16px; /* Padding */
+    height: 60px; /* Set the desired height */
+    padding: 0 16px; /* Adjust horizontal padding only */
     font-size: 16px; /* Font size */
+    line-height: 40px; /* Match line-height to height for vertical centering */
     cursor: pointer; /* Cursor style */
     transition: background-color 0.3s; /* Smooth transition */
-    width: 25%;
+    display: inline-block; /* Ensure it's inline with other elements */
+    vertical-align: middle; /* Align with other elements vertically */
+    width: 150px ;
   }
-  
   .button-add-row:hover {
     background-color: #0056b3; /* Darker blue on hover */
   }  
